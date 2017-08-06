@@ -1,18 +1,8 @@
 package com.sxito.p2pchat.socket;
 
-import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.opencv_objdetect;
-import org.bytedeco.javacv.Java2DFrameConverter;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
-
-import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 
 public class UDPAudioClient extends Thread {
 

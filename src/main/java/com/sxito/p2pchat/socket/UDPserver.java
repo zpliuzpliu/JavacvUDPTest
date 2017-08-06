@@ -1,7 +1,6 @@
 package com.sxito.p2pchat.socket;
 
 import org.bytedeco.javacv.CanvasFrame;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.util.Arrays;
 
 public class UDPserver {
     static final int INPORT = 1712;

@@ -1,12 +1,6 @@
 package com.sxito.p2pchat.socket;
 
-import org.bytedeco.javacv.CanvasFrame;
-
-import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
