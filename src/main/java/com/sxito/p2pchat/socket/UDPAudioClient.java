@@ -8,12 +8,8 @@ public class UDPAudioClient extends Thread {
 
     private DatagramSocket s;
     private InetAddress hostAddress;
-    private byte[] buf = new byte[1000];
-    private DatagramPacket dp = new DatagramPacket(buf, buf.length);
-    private int id;
 
-    public UDPAudioClient(int identifier) {
-        id = identifier;
+    public UDPAudioClient() {
         try {
             s = new DatagramSocket();
             hostAddress = InetAddress.getByName("localhost");
@@ -59,7 +55,7 @@ public class UDPAudioClient extends Thread {
 
     public static void main(String[] args) {
 
-        new UDPAudioClient(0).start();
+        new UDPAudioClient().start();
 
     }
 }

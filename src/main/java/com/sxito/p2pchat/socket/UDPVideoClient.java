@@ -10,21 +10,18 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
 
-public class UDPclient extends Thread {
+public class UDPVideoClient extends Thread {
 
     private DatagramSocket s;
     private InetAddress hostAddress;
     private byte[] buf = new byte[1000];
     private DatagramPacket dp = new DatagramPacket(buf, buf.length);
-    private int id;
-    static OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
 
-    public UDPclient(int identifier) {
-        id = identifier;
+    public UDPVideoClient() {
+
         try {
             s = new DatagramSocket();
             hostAddress = InetAddress.getByName("localhost");
-
         } catch (UnknownHostException e) {
             System.err.println("Cannot find host");
             System.exit(1);
@@ -48,6 +45,7 @@ public class UDPclient extends Thread {
             double split_length = 1000;
             int array_length = 0;
             int from, to;
+
             while (true) {
                 BufferedImage bufferedImage = java2DFrameConverter.convert(grabber.grab());
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -56,7 +54,7 @@ public class UDPclient extends Thread {
                 array_length = (int) Math.ceil(bytes.length / split_length);
                 mess = "start:" + array_length*1000;
                 starMess = mess.getBytes();
-                s.send(new DatagramPacket(starMess, starMess.length, hostAddress, UDPserver.INPORT));
+                s.send(new DatagramPacket(starMess, starMess.length, hostAddress, UDPVideoServer.INPORT));
                 for (int i = 0; i < array_length ; i++){
                     from = (int) (i * split_length);
                     to = (int) (from + split_length);
@@ -64,11 +62,11 @@ public class UDPclient extends Thread {
                         to = bytes.length;
                     }
                     byte[] newByte = Arrays.copyOfRange(bytes, from, to);
-                    s.send(new DatagramPacket(newByte, newByte.length, hostAddress, UDPserver.INPORT));
+                    s.send(new DatagramPacket(newByte, newByte.length, hostAddress, UDPVideoServer.INPORT));
                 }
                 mess = "over";
                 starMess = mess.getBytes();
-                s.send(new DatagramPacket(starMess, starMess.length, hostAddress, UDPserver.INPORT));
+                s.send(new DatagramPacket(starMess, starMess.length, hostAddress, UDPVideoServer.INPORT));
                 Thread.sleep(50);//50毫秒刷新一次图像
             }
 
@@ -83,7 +81,7 @@ public class UDPclient extends Thread {
 
     public static void main(String[] args) {
 
-        new UDPclient(0).start();
+        new UDPVideoClient().start();
 
     }
 }

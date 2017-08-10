@@ -3,7 +3,6 @@ package com.sxito.p2pchat;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FrameGrabber.Exception;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
-import javax.swing.*;
 
 public class VideoTest {
     public static void main(String[] args) throws Exception, InterruptedException
@@ -11,7 +10,7 @@ public class VideoTest {
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
         grabber.start();   //开始获取摄像头数据
         CanvasFrame canvas = new CanvasFrame("摄像头");//新建一个窗口
-        canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        canvas.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         canvas.setAlwaysOnTop(true);
 
         while(true)
