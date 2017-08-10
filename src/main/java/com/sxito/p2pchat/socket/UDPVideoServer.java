@@ -19,8 +19,6 @@ public class UDPVideoServer {
     byte[] bytes = new byte[50000];
 
     public UDPVideoServer() {
-
-        int index = 0;
         try {
             canvas = new CanvasFrame("摄像头");//新建一个窗口
             canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,6 +26,7 @@ public class UDPVideoServer {
             socket = new DatagramSocket(INPORT);
             System.out.println("Server started");
             String mess = "";
+            int index = 0;
             while (true) {
                 socket.receive(dp);
                 mess = new String(dp.getData(), 0, dp.getLength());
@@ -36,6 +35,7 @@ public class UDPVideoServer {
                     index = 0;
                 } else if (mess.equals("over")) {
                     ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+
                     BufferedImage image = null;
                     image = ImageIO.read(in);
                     canvas.showImage(image);

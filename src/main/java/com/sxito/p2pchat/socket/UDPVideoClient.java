@@ -45,10 +45,11 @@ public class UDPVideoClient extends Thread {
             double split_length = 1000;
             int array_length = 0;
             int from, to;
-
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
             while (true) {
                 BufferedImage bufferedImage = java2DFrameConverter.convert(grabber.grab());
-                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+
+                bao.reset();
                 ImageIO.write(bufferedImage, "jpg", bao);
                 bytes = bao.toByteArray();
                 array_length = (int) Math.ceil(bytes.length / split_length);
@@ -67,7 +68,7 @@ public class UDPVideoClient extends Thread {
                 mess = "over";
                 starMess = mess.getBytes();
                 s.send(new DatagramPacket(starMess, starMess.length, hostAddress, UDPVideoServer.INPORT));
-                Thread.sleep(50);//50毫秒刷新一次图像
+                Thread.sleep(20);
             }
 
         } catch (IOException e) {
